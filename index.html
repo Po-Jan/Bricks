@@ -5,22 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
-    <title>Pong</title>
+    
+    <title>Bricks</title>
 </head>
 
 <body>
     <div class="imgDiv"></div>
     <div class="fullContainer">
         <div class="leftContainer">
-            <div class="leftCenter"></div>
+            <div class="leftCenter">
+                <div class="buttons" onclick="drawBricks()">
+                    <span>Create brick</span>
+                </div>
+            </div>
         </div>
 
         <div class="middleContainer">
-            <div class="topMiddle"></div>
-            <div class="gameDiv">
-                <canvas id="myCanvas" height="600px" width="1000px"></canvas>
+            <div class="topMiddle">
+ 
             </div>
-            <div class="bottomMiddle"></div>
+            <div class="gameDiv">
+                <canvas id="myCanvas" height="600" width="1000px"></canvas>
+            </div>
+            <div class="bottomMiddle">
+
+            </div>
         </div>
 
         <div class="rightContainer">
@@ -28,7 +37,7 @@
         </div>
     </div>
     <script src="javascript/ball.js"></script>
-    <script src="javascript/movement.js"></script>
+    <script src="javascript/bricks.js"></script>
 </body>
 
 </html>
