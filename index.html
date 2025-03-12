@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
     <title>Pong</title>
 </head>
+
 <body>
     <div class="imgDiv"></div>
-    <div class="leftContainer">
-        <div class="leftCenter"></div>
-    </div>
+    <div class="fullContainer">
+        <div class="leftContainer">
+            <div class="leftCenter"></div>
+        </div>
 
-    <div class="middleContainer">
-        <div class="topMiddle"></div>
-        <div class="gameDiv"></div>
-        <div class="bottomMiddle"></div>
-    </div>
+        <div class="middleContainer">
+            <div class="topMiddle"></div>
+            <div class="gameDiv">
+                <canvas id="myCanvas" height="600px" width="1000px"></canvas>
+            </div>
+            <div class="bottomMiddle"></div>
+        </div>
 
-    <div class="rightContainer">
-        <div class="rightCenter"></div>
+        <div class="rightContainer">
+            <div class="rightCenter"></div>
+        </div>
     </div>
+    <script src="javascript/ball.js"></script>
+    <script src="javascript/movement.js"></script>
 </body>
+
 </html>
