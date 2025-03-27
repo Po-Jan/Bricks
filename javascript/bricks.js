@@ -17,9 +17,16 @@ function drawBall() {
     ctx.closePath();
 }
 
+function resetBall(){
+    x = canvas.width / 2;
+    y = canvas.height - 100;
+    dx = 2;
+    dy = -2;
+}
+
 
 //krairanje paddle elementa
-var paddleHeight = 20;
+var paddleHeight = 80;
 var paddleWidth = 170;
 var paddleX = (canvas.width - paddleWidth) / 2;
 var paddleY = canvas.height - paddleHeight - 30;
@@ -31,6 +38,12 @@ function drawPaddle() {
     ctx.fill();
     ctx.closePath();
 }
+
+function resetPaddle(){
+    paddleX = (canvas.width - paddleWidth) / 2;
+    paddleY = canvas.height - paddleHeight - 30;
+}
+
 //kreiranje brickov
 var brickRowCount = 4;
 var brickColumnCount = 4;
@@ -57,7 +70,6 @@ function drawBricks() {
                 var brickX = centeringForumla + (brickWidth + brickPadding) * r;
                 var brickY = brickOffsetTop + (brickHeight + brickPadding) * c;
 
-                // ✅ Fix: Set correct positions in the brick object
                 bricks[c][r].x = brickX;
                 bricks[c][r].y = brickY;
                 ctx.beginPath();
@@ -70,6 +82,16 @@ function drawBricks() {
     }
 }
 
+function resetBricks(){
+    for (c = 0; c < brickColumnCount; c++) {
+        bricks[c] = [];
+        for (r = 0; r < brickRowCount; r++) {
+            bricks[c][r] = { x: 0, y: 0, status: 1 };
+        }
+    }
+
+}
+
 function collisionDetection() {
     if (
         x > paddleX &&
@@ -77,7 +99,15 @@ function collisionDetection() {
         y + ballRadius > paddleY &&
         y - ballRadius < paddleY + paddleHeight
     ) {
-        dy=-dy;
+        let prevX = x - dx;
+        if (
+            prevX + ballRadius <= paddleX ||
+            prevX - ballRadius >= paddleX + brickWidth
+        ) {
+            dx = -dx;
+        } else {
+            dy = -dy;
+        }
     }
 }
 
@@ -111,26 +141,22 @@ function collisionDetectionForBricks() {
         }
     }
 }
+let gameEnded;
 
 function endGame(){
-        gameEnded=true;
-        swal({
-            title: " Congrats:",
-            text: "\nYou have failed\n loser!",
-            icon: "info",
-            buttons: {
-               confirm: {
-                  text: "Okay!",
-                  className: "swal-button"
-               }
-            }
-         });
-    } 
+    gameEnded=true;
+    resetBall();
+    resetPaddle();
+    resetBricks();
+} 
+
+function startGame(){
+    gameEnded=false;
+
 }
-let gameEnded=false;
 
 function draw() {
-    if(!gameEnded){
+    if(gameEnded==false){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall();
         drawPaddle();
@@ -145,12 +171,16 @@ function draw() {
             paddleX += 7;
         x += dx;
         y += dy;
-
+        
         if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
             dx = -dx;
         }
-        if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+        
+        if (y + dy < ballRadius) {
             dy = -dy;
+        } else if (y + dy > canvas.height - ballRadius) {
+            endGame();
+            return;
         }
     }
         
