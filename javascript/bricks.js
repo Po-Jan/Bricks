@@ -77,7 +77,7 @@ function collisionDetection() {
         y + ballRadius > paddleY &&
         y - ballRadius < paddleY + paddleHeight
     ) {
-        dy = -dy;
+        dy=-dy;
     }
 }
 
@@ -112,31 +112,48 @@ function collisionDetectionForBricks() {
     }
 }
 
-
-
+function endGame(){
+        gameEnded=true;
+        swal({
+            title: " Congrats:",
+            text: "\nYou have failed\n loser!",
+            icon: "info",
+            buttons: {
+               confirm: {
+                  text: "Okay!",
+                  className: "swal-button"
+               }
+            }
+         });
+    } 
+}
+let gameEnded=false;
 
 function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall();
-    drawPaddle();
-    drawBricks();
-    collisionDetection();
-    collisionDetectionForBricks();
+    if(!gameEnded){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBall();
+        drawPaddle();
+        drawBricks();
+        collisionDetection();
+        collisionDetectionForBricks();
 
-    if (leftPressed == true && paddleX > 0)
-        paddleX -= 7;
+        if (leftPressed == true && paddleX > 0)
+            paddleX -= 7;
 
-    else if (rightPressed == true && paddleX < canvas.width - paddleWidth)
-        paddleX += 7;
-    x += dx;
-    y += dy;
+        else if (rightPressed == true && paddleX < canvas.width - paddleWidth)
+            paddleX += 7;
+        x += dx;
+        y += dy;
 
-    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-        dx = -dx;
+        if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+            dx = -dx;
+        }
+        if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+            dy = -dy;
+        }
     }
-    if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
-        dy = -dy;
-    }
+        
 }
 
 var rightPressed = false;
