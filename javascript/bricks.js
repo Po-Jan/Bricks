@@ -26,7 +26,7 @@ function resetBall(){
 
 
 //krairanje paddle elementa
-var paddleHeight = 80;
+var paddleHeight = 20;
 var paddleWidth = 170;
 var paddleX = (canvas.width - paddleWidth) / 2;
 var paddleY = canvas.height - paddleHeight - 30;
