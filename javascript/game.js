@@ -1,0 +1,166 @@
+let gameEnded = true;
+let playerEnabled = false;
+
+
+let speed = 3;
+let prevDx;
+let prevDy;
+
+
+function startGame() {
+    if (gameEnded) {
+        dx = speed;
+        dy = -speed;
+        gameEnded = false;
+        points = 0;
+        startTimer();
+        displayPoints();
+        displayDifficulty();
+        enablePlayerControls();
+    }
+}
+
+function resetGame() {
+    gameEnded = true;
+    dx = 0;
+    dy = 0;
+    resetBall();
+    resetPaddle();
+    resetBricks();
+    resetTimer();
+    disablePlayerControls();
+}
+
+
+
+function pauseGame() {
+    prevDx = dx;
+    prevDy = dy;
+    dx = 0;
+    dy = 0;
+    disablePlayerControls();
+    stopTimer();
+}
+
+function unPauseGame() {
+    dx = prevDx;
+    dy = prevDy;
+    enablePlayerControls();
+    startTimer();
+}
+
+function winGame() {
+    winGameSW();
+    resetGame();
+}
+
+function winGameSW() {
+    swal({
+        title: "🎉 Congrats",
+        text:
+            "You have destroyed all the bricks!\n\nSummary:\nPoints: " +
+            points +
+            "\nDifficulty: " +
+            difficultyVariable + "\nTime spent: " + formatted + "s",
+        icon: "success",
+        buttons: {
+            confirm: {
+                text: "Play Again",
+                className: "win-button",
+            },
+        },
+        className: "win-popup",
+    });
+}
+
+
+function loseGame() {
+    loseGameSW();
+    resetGame();
+}
+
+function loseGameSW() {
+    swal({
+        title: "You lose",
+        text: "Try again!\nThe ball hit the bottom.\n\nSummary:\nPoints: " +
+            points +
+            "\nDifficulty: " +
+            difficultyVariable + "\n Time spent: " + formatted + "s",
+        icon: "error",
+        buttons: {
+            confirm: {
+                text: "Retry",
+                className: "lose-button",
+            },
+        },
+        className: "lose-popup",
+    });
+}
+
+function hasGameEnded() {
+    for (var c = 0; c < brickColumnCount; c++) {
+        for (var r = 0; r < brickRowCount; r++) {
+            var b = bricks[c][r];
+            if (b.status === 1 || b.status === 2) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function enablePlayerControls() {
+    playerEnabled = true;
+}
+
+function disablePlayerControls() {
+    playerEnabled = false;
+}
+
+
+
+function draw() {
+    if (gameEnded) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBall();
+    drawPaddle();
+    drawBricks();
+    collisionDetection();
+    collisionDetectionForBricks();
+
+    // player control
+    if (playerEnabled) {
+        if (leftPressed && paddleX > 0)
+            paddleX -= 7;
+        else if (rightPressed && paddleX < canvas.width - paddleWidth)
+            paddleX += 7;
+    }
+
+    // ball movement
+    x += dx;
+    y += dy;
+
+    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+    }
+
+    if (y + dy < ballRadius) {
+        dy = -dy;
+    } else if (y + dy > canvas.height - ballRadius) {
+        loseGame();
+        return;
+    }
+
+    if (hasGameEnded()) {
+        winGame();
+        return;
+    }
+}
+
+function gameLoop() {
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+
+requestAnimationFrame(gameLoop);

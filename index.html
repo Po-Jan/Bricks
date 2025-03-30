@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
-    
+
     <title>Bricks</title>
 </head>
 
@@ -17,12 +17,42 @@
                 <div class="buttons" onclick="startGame()">
                     <span>Start Game</span>
                 </div>
+                <div class="buttons" id="difficultyToggle">
+                    <span>Change difficulty</span>
+                </div>
+                <div class="buttons" onclick="loseGameSW()">
+                    <span>Lose</span>
+                </div>
+                <div class="buttons" onclick="winGameSW()">
+                    <span>Win</span>
+                </div> 
+                <div class="buttons" id="pauseButton">
+                    <span>Pause</span>
+                </div>
+                <div class="buttons" id="leaderboardButton">
+                    <span>Leaderboard</span>
+                </div>
+                <div class="buttons" id="name" onclick="askForPlayerName()">
+                    <span>Name</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="leaderboard displayNone" >
+            <div class="header">
+                <span>ID</span>
+                <span>Name</span>
+                <span>Difficulty</span>
+                <span>Points</span>
             </div>
         </div>
 
         <div class="middleContainer">
             <div class="topMiddle">
- 
+                <span class="time">Time: 00:00</span>
+                <span class="score"> Score: 0</span>
+                <span class="difficulty">Difficulty: easy</span>
+                <span id="nameShow">Name: </span>
             </div>
             <div class="gameDiv">
                 <canvas id="myCanvas" height="600" width="1000px"></canvas>
@@ -37,6 +67,15 @@
         </div>
     </div>
     <script src="javascript/bricks.js"></script>
+    <script src="javascript/difficulty.js"></script>
+    <script src="javascript/timer.js"></script>
+    <script src="javascript/collisions.js"></script>
+    <script src="javascript/game.js"></script>
+    <script src="javascript/keyPressed.js"></script>
+    <script src="javascript/paddle.js"></script>
+    <script src="javascript/ball.js"></script>
+    <script src="javascript/name.js"></script>
+    <script src="javascript/leaderboard.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 

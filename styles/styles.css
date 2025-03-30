@@ -1,82 +1,339 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-html,body{
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
-body{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: black ;
-}
-.imgDiv{
-    background: url("../assets/background.jpg") no-repeat center center;
-    opacity: 0.3;
-    height: 100%;
-    width: 100%;
-    z-index: -22;
-    background-size: cover;
-    position: fixed;
-}
-.fullContainer{
-    display: flex;
-    align-items: center;
-    height: 100vh;
-}
-.leftContainer,.middleContainer,.rightContainer{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.topMiddle,.bottomMiddle{
-    flex: 1;
-    width: 100%;
-    max-height:250px;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    position: relative; 
-    overflow: hidden;
 
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.gameDiv{
-    height: 600px; 
-    width: 100%;
-    border: 4px solid black;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: black;
+  position: relative;
 }
-.leftCenter,.rightCenter{
-    height: 600px;
-    width: 456px;
+
+.imgDiv {
+  background: url("../assets/background.jpg") no-repeat center center;
+  opacity: 0.3;
+  height: 100%;
+  width: 100%;
+  z-index: -22;
+  background-size: cover;
+  position: fixed;
 }
+
+.fullContainer {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.leftContainer,
+.middleContainer,
+.rightContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.topMiddle,
+.bottomMiddle {
+  flex: 1;
+  width: 100%;
+  max-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.gameDiv {
+  height: 600px;
+  width: 100%;
+  border: 4px solid black;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leftCenter,
+.rightCenter {
+  height: 600px;
+  width: 456px;
+}
+
 /**********************************/
-.buttons{
-    width: 150px;
-    height: 70px;
-    background-color: antiquewhite;
-    border-radius: 15px;
-    border: 2px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    user-select: none;
+.buttons {
+  width: 150px;
+  height: 50px;
+  background-color: antiquewhite;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
 }
 
-.buttons span{
-    font-size: 15px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 700;
+.buttons span {
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 700;
+}
+
+.topMiddle {
+  justify-content: space-around;
+}
+
+.topMiddle span {
+  color: lightgray;
+  font-size: 25px;
+  font-family: inherit;  min-width: 250px;
 }
 
 
+.leaderboard::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(43, 45, 49);
+  
+}
+
+.leaderboard::-webkit-scrollbar-thumb {
+  background-color: #1E1F22;
+  border-radius: 10px; 
+}
+
+.leaderboard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  min-height: 500px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
+  border: 5px solid rgb(68, 68, 68);
+  background-color: #979797;
+  color: white;
+  z-index: 999;
+  user-select: none;
+  overflow-y: scroll;
+}
+
+
+.leaderboard .header {
+  width: 100;
+  height: 50px;
+  background-color: green;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+
+
+.displayNone {
+  display: none;
+}
+
+.displayFlex {
+  display: flex;
+}
+
+/* --- SHARED BASE STYLING --- */
+.swal-modal {
+  border-radius: 10px;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+}
+
+/* Shared text style */
+.swal-text {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 10px;
+  white-space: pre-wrap;
+}
+
+/* --- DIFFICULTY POPUP — Ancient Pyramid / Jungle Inspired --- */
+.swal-modal.difficulty-popup {
+  background-color: #2c2b29;
+  /* Dark stone / sandstone base */
+  color: #e8e0c7;
+  /* Aged parchment text */
+  border: 1px solid #4a463f;
+  box-shadow: 0 0 12px rgba(180, 150, 90, 0.1);
+  border-radius: 8px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Title styling */
+.difficulty-popup .swal-title {
+  color: #c9b47f;
+  /* A golden-sand tone */
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Dropdown styling */
+.difficulty-popup select {
+  background-color: #3b3a36;
+  /* Worn dark stone */
+  color: #e8e0c7;
+  /* Parchment-like text */
+  border: 1px solid #6d634b;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 15px;
+  margin-top: 10px;
+  width: 100%;
+  font-family: inherit;
+}
+
+/* Confirm button */
+.difficulty-popup .swal-button {
+  background-color: #5e7c5e;
+  /* Soft jungle green */
+  color: #f3f3e0;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.difficulty-popup .swal-button:hover {
+  background-color: #486349;
+  color: #fff;
+}
+
+/* --- WIN POPUP — Refined Ancient Jungle Style --- */
+.swal-modal.win-popup {
+  background-color: #232220;
+  /* dark earthy stone */
+  color: #e0ddc9;
+  /* soft parchment */
+  border: 1px solid #3e3c36;
+  box-shadow: 0 0 8px rgba(200, 180, 120, 0.1);
+  border-radius: 10px;
+  width: 450px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Hide icon if shown */
+.swal-modal.win-popup .swal-icon--success {
+  display: none !important;
+}
+
+/* Title */
+.swal-modal.win-popup .swal-title {
+  color: #e7d9a4;
+  /* ancient-gold tone */
+  font-weight: 600;
+  font-size: 25px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Body text */
+.swal-modal.win-popup .swal-text {
+  color: #e0ddc9;
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+/* Confirm button */
+.win-button {
+  background-color: #5e7c5e;
+  /* calm jungle green */
+  color: #f3f1e8;
+  border: 1px solid #3d5242;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 15px;
+  margin-top: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.win-button:hover {
+  background-color: #486349;
+  color: #ffffff;
+}
+
+
+/* --- LOSE POPUP — Ancient Jungle Theme --- */
+.swal-modal.lose-popup {
+  background-color: #2a2423;
+  /* dark stone/red clay tone */
+  color: #f0d7d2;
+  /* light warm tone */
+  border: 1px solid #4f3b39;
+  box-shadow: 0 0 10px rgba(120, 50, 50, 0.15);
+  border-radius: 10px;
+  width: 450px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Hide the default SweetAlert error icon */
+.swal-modal.lose-popup .swal-icon--error {
+  display: none !important;
+}
+
+/* Title */
+.swal-modal.lose-popup .swal-title {
+  color: #e67e7e;
+  /* dusty red */
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Text */
+.swal-modal.lose-popup .swal-text {
+  color: #f0d7d2;
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+/* Confirm Button */
+.lose-button {
+  background-color: #7b3f3f;
+  /* muted brick red */
+  color: #fbeeee;
+  border: 1px solid #aa5a5a;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 15px;
+  margin-top: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.lose-button:hover {
+  background-color: #aa5a5a;
+  color: #ffffff;
+}

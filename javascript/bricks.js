@@ -1,215 +1,71 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-//kreiranje žoge
-var x = canvas.width / 2;
-var y = canvas.height - 100;
-var dx = 2;
-var dy = -2;
-var ballColor = "#0095DD"
-var ballRadius = 10;
-
-function drawBall() {
-    ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-    ctx.fillStyle = ballColor; //"#0095DD"
-    ctx.fill();
-    ctx.closePath();
-}
-
-function resetBall(){
-    x = canvas.width / 2;
-    y = canvas.height - 100;
-    dx = 2;
-    dy = -2;
-}
-
-
-//krairanje paddle elementa
-var paddleHeight = 20;
-var paddleWidth = 170;
-var paddleX = (canvas.width - paddleWidth) / 2;
-var paddleY = canvas.height - paddleHeight - 30;
-
-function drawPaddle() {
-    ctx.beginPath();
-    ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
-    ctx.closePath();
-}
-
-function resetPaddle(){
-    paddleX = (canvas.width - paddleWidth) / 2;
-    paddleY = canvas.height - paddleHeight - 30;
-}
 
 //kreiranje brickov
-var brickRowCount = 4;
-var brickColumnCount = 4;
-var brickWidth = 175;
-var brickHeight = 50;
+var brickRowCount = 1;
+var brickColumnCount = 1;
+var brickWidth = 555;
+var brickHeight = 30;
 var brickPadding = 30;
-var brickOffsetTop = 30;
-var brickOffsetLeft = 30;
-var centeringForumla = canvas.width / 2 - ((brickWidth + brickPadding) * brickRowCount) / 2;
+var brickOffsetTop = 15;
+var brickOffsetLeft = 20;
+var brickColor = "#0095DD";
 
 
 var bricks = [];
 for (c = 0; c < brickColumnCount; c++) {
     bricks[c] = [];
     for (r = 0; r < brickRowCount; r++) {
-        bricks[c][r] = { x: 0, y: 0, status: 1 };
+        bricks[c][r] = { x: 0, y: 0, status: 2, brickColor: "#0095DD" };
     }
 }
 
 function drawBricks() {
-    for (c = 0; c < brickColumnCount; c++) {
-        for (r = 0; r < brickRowCount; r++) {
-            if (bricks[c][r].status == 1) {
-                var brickX = centeringForumla + (brickWidth + brickPadding) * r;
-                var brickY = brickOffsetTop + (brickHeight + brickPadding) * c;
+    const totalBricksWidth = brickRowCount * brickWidth + (brickRowCount - 1) * brickPadding;
+    const brickOffsetLeft = (canvas.width - totalBricksWidth) / 2;
+
+    for (let c = 0; c < brickColumnCount; c++) {
+        for (let r = 0; r < brickRowCount; r++) {
+            if (bricks[c][r].status == 1 || bricks[c][r].status == 2) {
+                const brickX = brickOffsetLeft + (brickWidth + brickPadding) * r;
+                const brickY = brickOffsetTop + (brickHeight + brickPadding) * c;
 
                 bricks[c][r].x = brickX;
                 bricks[c][r].y = brickY;
+
                 ctx.beginPath();
                 ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                ctx.fillStyle = "#0095DD";
+                ctx.fillStyle = bricks[c][r].brickColor;
                 ctx.fill();
                 ctx.closePath();
             }
         }
     }
 }
-
-function resetBricks(){
+function resetBricks() {
     for (c = 0; c < brickColumnCount; c++) {
         bricks[c] = [];
         for (r = 0; r < brickRowCount; r++) {
-            bricks[c][r] = { x: 0, y: 0, status: 1 };
-        }
-    }
-
-}
-
-function collisionDetection() {
-    if (
-        x > paddleX &&
-        x < paddleX + paddleWidth &&
-        y + ballRadius > paddleY &&
-        y - ballRadius < paddleY + paddleHeight
-    ) {
-        let prevX = x - dx;
-        if (
-            prevX + ballRadius <= paddleX ||
-            prevX - ballRadius >= paddleX + brickWidth
-        ) {
-            dx = -dx;
-        } else {
-            dy = -dy;
+            bricks[c][r] = { x: 0, y: 0, status: 2, brickColor: "#0095DD" };
         }
     }
 }
 
-function collisionDetectionForBricks() {
-    for (var c = 0; c < brickColumnCount; c++) {
-        for (var r = 0; r < brickRowCount; r++) {
-            var b = bricks[c][r];
-            if (b.status == 1) {
-                var bx = b.x;
-                var by = b.y;
-                if (
-                    x + ballRadius > bx &&
-                    x - ballRadius < bx + brickWidth &&
-                    y + ballRadius > by &&
-                    y - ballRadius < by + brickHeight
-                ) {
-                    // Prejsna pozicija žoge
-                    let prevX = x - dx;
-                    if (
-                        prevX + ballRadius <= bx ||
-                        prevX - ballRadius >= bx + brickWidth
-                    ) {
-                        dx = -dx;
-                    } else {
-                        dy = -dy;
-                    }
 
-                    b.status = 0;
-                }
-            }
-        }
-    }
-}
-let gameEnded;
 
-function endGame(){
-    gameEnded=true;
-    resetBall();
-    resetPaddle();
-    resetBricks();
-} 
 
-function startGame(){
-    gameEnded=false;
-
+let points = 0;
+const score = document.querySelector(".score");
+function displayPoints() {
+    score.textContent = "Score: " + points;
 }
 
-function draw() {
-    if(gameEnded==false){
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawBall();
-        drawPaddle();
-        drawBricks();
-        collisionDetection();
-        collisionDetectionForBricks();
-
-        if (leftPressed == true && paddleX > 0)
-            paddleX -= 7;
-
-        else if (rightPressed == true && paddleX < canvas.width - paddleWidth)
-            paddleX += 7;
-        x += dx;
-        y += dy;
-        
-        if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-            dx = -dx;
-        }
-        
-        if (y + dy < ballRadius) {
-            dy = -dy;
-        } else if (y + dy > canvas.height - ballRadius) {
-            endGame();
-            return;
-        }
-    }
-        
+let difficultyVariable = "easy";
+const setText = document.querySelector(".difficulty");
+function displayDifficulty() {
+    setText.textContent = "Difficulty: " + difficultyVariable;
 }
 
-var rightPressed = false;
-var leftPressed = false;
 
 
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-
-
-function keyDownHandler(e) {
-    if (e.keyCode == 39) {
-        rightPressed = true;
-    }
-    else if (e.keyCode == 37) {
-        leftPressed = true;
-    }
-}
-
-function keyUpHandler(e) {
-    if (e.keyCode == 39) {
-        rightPressed = false;
-    }
-    else if (e.keyCode == 37) {
-        leftPressed = false;
-    }
-}
-
-setInterval(draw, 10);
