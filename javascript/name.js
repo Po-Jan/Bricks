@@ -6,6 +6,8 @@ function askForPlayerName() {
     content: makeInputField(),
     buttons:  "Start",
     className: "name-popup",
+    closeOnClickOutside:false,
+    closeOnEsc: false,
   }).then((value) => {
     if (value) {
       const input = document.getElementById("nameInput");
@@ -24,3 +26,7 @@ function makeInputField() {
   input.maxLength=15;
   return input;
 }
+
+window.addEventListener("load", () => {
+  askForPlayerName();
+});

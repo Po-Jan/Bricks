@@ -3,9 +3,9 @@ var ctx = canvas.getContext("2d");
 
 
 //kreiranje brickov
-var brickRowCount = 1;
-var brickColumnCount = 1;
-var brickWidth = 555;
+var brickRowCount = 5;
+var brickColumnCount = 5;
+var brickWidth = 150;
 var brickHeight = 30;
 var brickPadding = 30;
 var brickOffsetTop = 15;
