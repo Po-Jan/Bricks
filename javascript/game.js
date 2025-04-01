@@ -10,7 +10,7 @@ let prevDy;
 function startGame() {
     if (gameEnded) {
         dx = speed;
-        dy = -speed;
+        dy = -speed*1.3;
         gameEnded = false;
         points = 0;
         startTimer();
@@ -55,6 +55,7 @@ function winGame() {
 }
 
 function winGameSW() {
+
     swal({
         title: "🎉 Congrats",
         text:
@@ -122,41 +123,64 @@ function disablePlayerControls() {
 function draw() {
     if (gameEnded) return;
 
+    // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw elements
     drawBall();
     drawPaddle();
     drawBricks();
     collisionDetection();
     collisionDetectionForBricks();
 
-    // player control
+    // Player control (paddle movement)
     if (playerEnabled) {
-        if (leftPressed && paddleX > 0)
+        if (leftPressed && paddleX > 0) {
             paddleX -= 7;
-        else if (rightPressed && paddleX < canvas.width - paddleWidth)
+        } else if (rightPressed && paddleX < canvas.width - paddleWidth) {
             paddleX += 7;
+        }
     }
 
-    // ball movement
-    x += dx;
-    y += dy;
+    // === Predict next ball position ===
+    let nextX = x + dx;
+    let nextY = y + dy;
 
-    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+    // Wall collision: left & right
+    if (nextX > canvas.width - ballRadius || nextX < ballRadius) {
         dx = -dx;
     }
 
-    if (y + dy < ballRadius) {
+    // Top wall collision
+    if (nextY < ballRadius) {
         dy = -dy;
-    } else if (y + dy > canvas.height - ballRadius) {
-        loseGame();
-        return;
     }
 
+    // Bottom wall / Paddle collision
+    else if (nextY > canvas.height - ballRadius) {
+        if (x > paddleX && x < paddleX + paddleWidth) {
+            // Hit paddle: bounce up and adjust dx based on hit location
+            dy = -dy;
+            dx = 8 * ((x - (paddleX + paddleWidth / 2)) / paddleWidth);
+        } else {
+            // Missed paddle
+            loseGame();
+            return;
+        }
+    }
+
+    // Move ball AFTER all collision handling
+    x += dx;
+    y += dy;
+
+    // Win condition check
     if (hasGameEnded()) {
         winGame();
         return;
     }
 }
+
+
 
 function gameLoop() {
     draw();

@@ -191,7 +191,7 @@ body {
 }
 
 /* Dropdown styling */
-.difficulty-popup select {
+.difficulty-popup select,.difficulty-popup input {
   background-color: #3b3a36;
   /* Worn dark stone */
   color: #e8e0c7;
@@ -204,6 +204,8 @@ body {
   width: 100%;
   font-family: inherit;
 }
+
+
 
 /* Confirm button */
 .difficulty-popup .swal-button {

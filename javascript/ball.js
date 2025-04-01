@@ -21,5 +21,5 @@ function resetBall() {
     x = canvas.width / 2;
     y = canvas.height - 100;
     dx = speed;
-    dy = -speed;
+    dy = -speed*1.3;
 }

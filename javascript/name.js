@@ -5,7 +5,7 @@ function askForPlayerName() {
     title: "Please insert your name:",
     content: makeInputField(),
     buttons:  "Start",
-    className: "name-popup",
+    className: "difficulty-popup",
     closeOnClickOutside:false,
     closeOnEsc: false,
   }).then((value) => {
