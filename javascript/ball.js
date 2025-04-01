@@ -4,7 +4,7 @@ var y = canvas.height - 100;
 var dx;
 var dy;
 
-var ballColor = "#0095DD"
+var ballColor = "black"
 var ballRadius = 10;
 
 
