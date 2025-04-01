@@ -21,6 +21,7 @@ function startGame() {
 }
 
 function resetGame() {
+    saveScore();
     gameEnded = true;
     dx = 0;
     dy = 0;
