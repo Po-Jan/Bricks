@@ -6,6 +6,7 @@ function collisionDetection() {
         y - ballRadius < paddleY + paddleHeight
     ) {
         dy = -dy;
+        dx = 5 * ((x - (paddleX + paddleWidth / 2)) / paddleWidth);
     }
 }
 

@@ -10,7 +10,7 @@ let prevDy;
 function startGame() {
     if (gameEnded) {
         dx = speed;
-        dy = -speed*1.3;
+        dy = -speed;
         gameEnded = false;
         points = 0;
         startTimer();
@@ -124,17 +124,16 @@ function disablePlayerControls() {
 function draw() {
     if (gameEnded) return;
 
-    // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw elements
+
     drawBall();
     drawPaddle();
     drawBricks();
     collisionDetection();
     collisionDetectionForBricks();
 
-    // Player control (paddle movement)
+
     if (playerEnabled) {
         if (leftPressed && paddleX > 0) {
             paddleX -= 7;
@@ -143,7 +142,7 @@ function draw() {
         }
     }
 
-    // === Predict next ball position ===
+
     let nextX = x + dx;
     let nextY = y + dy;
 
@@ -156,18 +155,10 @@ function draw() {
     if (nextY < ballRadius) {
         dy = -dy;
     }
-
-    // Bottom wall / Paddle collision
-    else if (nextY > canvas.height - ballRadius) {
-        if (x > paddleX && x < paddleX + paddleWidth) {
-            // Hit paddle: bounce up and adjust dx based on hit location
-            dy = -dy;
-            dx = 8 * ((x - (paddleX + paddleWidth / 2)) / paddleWidth);
-        } else {
-            // Missed paddle
-            loseGame();
-            return;
-        }
+    
+    if(nextY+ballRadius>canvas.height){
+        loseGame();
+        return;
     }
 
     // Move ball AFTER all collision handling
