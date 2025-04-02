@@ -7,7 +7,7 @@ var paddleY = canvas.height - paddleHeight;
 function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "green";
     ctx.fill();
     ctx.closePath();
 }
