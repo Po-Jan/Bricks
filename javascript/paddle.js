@@ -4,11 +4,12 @@ var paddleWidth = 170;
 var paddleX = (canvas.width - paddleWidth) / 2;
 var paddleY = canvas.height - paddleHeight;
 
+let paddleImage=new Image();
+paddleImage.src="assets/vaservaga.png"
+
 function drawPaddle() {
     ctx.beginPath();
-    ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
-    ctx.fillStyle = "green";
-    ctx.fill();
+    ctx.drawImage(paddleImage,paddleX, paddleY, paddleWidth, paddleHeight);
     ctx.closePath();
 }
 

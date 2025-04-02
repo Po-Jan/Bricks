@@ -48,7 +48,7 @@ function collisionDetectionForBricks() {
                     b.status--;
 
                     if (b.status === 1) {
-                        b.brickColor = "#FF0000";
+                        b.image=brickImageCracked;
                     } else if (b.status === 0) {
                         points = points + 10;
                         displayPoints();

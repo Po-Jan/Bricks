@@ -54,10 +54,10 @@ function renderLeaderboard() {
 
     if (data.length === 0) {
         const emptyRow = document.createElement("div");
-        emptyRow.style.gridColumn = "1 / -1"; // Make it span all columns
+        emptyRow.style.gridColumn = "1 / -1";
         emptyRow.style.textAlign = "center";
         emptyRow.style.padding = "10px 0";
-        emptyRow.textContent = "No scores yet.";
+        emptyRow.textContent = "...";
         leaderboard.appendChild(emptyRow);
 
     }
