@@ -15,13 +15,12 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: black;
   position: relative;
 }
 
 .imgDiv {
-  background: url("../assets/background.jpg") no-repeat center center;
-  opacity: 0.3;
+  background: url("../assets/bricks_background.jpg") no-repeat center center;
+  opacity: 0.5;
   height: 100%;
   width: 100%;
   z-index: -22;
@@ -59,14 +58,64 @@ body {
   user-select: none;
 }
 
+.backgroundDiv {
+  background-color: rgba(175, 173, 173, 0.767);
+  width: 100%;
+  display: flex;
+  min-height: 50px;
+  border-radius: 15px;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px;
+
+}
+.backgroundDiv span{
+  font-style: bold;
+  font-size: 30px;
+}
+
+.bottomMiddle {
+  justify-content: space-around;
+  width: 80%;
+}
+
 .gameDiv {
   height: 600px;
   width: 100%;
-  border: 4px solid black;
+  padding: 8px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 15px;
+  background-color: rgba(175, 173, 173, 0.767);
+  position: relative;
+}
+
+.pauseDiv {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+  background-color: rgba(185, 184, 184, 0.541);
+  border-radius:inherit;
+
+
+}
+
+.pauseDiv span {
+  font-size: 25px;
+  margin-bottom: 20px;
+
+}
+
+.pauseDiv div {
+  font-size: 25px;
+
 }
 
 .leftCenter,
@@ -79,8 +128,9 @@ body {
 .buttons {
   width: 150px;
   height: 50px;
-  background-color: antiquewhite;
-  border: 2px solid black;
+  background-color: rgba(223, 119, 34, 0.904);
+  border-radius: 10px;
+  border: 2px rgba(248, 248, 248, 0.726) solid;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,24 +146,25 @@ body {
 
 .topMiddle {
   justify-content: space-around;
+
 }
 
 .topMiddle span {
-  color: lightgray;
   font-size: 25px;
-  font-family: inherit;  min-width: 250px;
+  font-family: inherit;
+  color: #1E1F22;
 }
 
 
 .leaderboard::-webkit-scrollbar {
   width: 10px;
   background-color: rgb(43, 45, 49);
-  
+
 }
 
 .leaderboard::-webkit-scrollbar-thumb {
   background-color: #1E1F22;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 .leaderboard {
@@ -124,7 +175,7 @@ body {
   width: 450px;
   height: 500px;
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px);
   border: 5px solid rgb(68, 68, 68);
   background-color: #979797;
   color: white;
@@ -133,11 +184,17 @@ body {
   overflow-y: scroll;
 }
 
+.opacity {
+  opacity: 0.65;
+  border: 2px rgba(141, 141, 141, 0.589) solid;
+}
+
 
 .leaderboard .header,
-.leaderboard > div:not(.header) {
+.leaderboard>div:not(.header) {
   display: grid;
-  grid-template-columns: 50px 1fr 1fr 70px; /* ID, Name, Difficulty, Points */
+  grid-template-columns: 50px 1fr 1fr 70px;
+  /* ID, Name, Difficulty, Points */
   height: 50px;
   align-items: center;
   padding: 0 15px;
@@ -151,7 +208,7 @@ body {
 }
 
 /* Entry rows */
-.leaderboard > div:not(.header) {
+.leaderboard>div:not(.header) {
   background-color: grey;
   color: white;
 }
@@ -203,7 +260,8 @@ body {
 }
 
 /* Dropdown styling */
-.difficulty-popup select,.difficulty-popup input {
+.difficulty-popup select,
+.difficulty-popup input {
   background-color: #3b3a36;
   /* Worn dark stone */
   color: #e8e0c7;

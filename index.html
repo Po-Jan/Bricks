@@ -15,7 +15,40 @@
     <div class="fullContainer">
         <div class="leftContainer">
             <div class="leftCenter">
-                <div class="buttons" onclick="startGame()">
+               
+            </div>
+        </div>
+
+        <div class="leaderboard displayNone" >
+            <div class="header">
+                <span>Rk</span>
+                <span>Name</span>
+                <span>Difficulty</span>
+                <span>Points</span>
+            </div>
+
+        </div>
+
+        <div class="middleContainer">
+            <div class="topMiddle">
+                <div class="backgroundDiv">
+                    <span class="time">Time: 00:00</span>
+                    <span class="score"> Score: 0</span>
+                    <span class="difficulty">Difficulty: easy</span>
+                    <span id="nameShow">Name: </span>
+                </div>
+             
+            </div>
+            <div class="gameDiv">
+                <canvas id="myCanvas" height="600" width="1000"></canvas>
+                <div class="pauseDiv displayNone">
+                    <span>Paused</span>
+                    <div>Press P or click resume button to continiue.</div>
+                </div>
+            </div>
+
+            <div class="bottomMiddle">
+                <div class="buttons" id="startButton" onclick="startGame()">
                     <span>Start Game</span>
                 </div>
                 <div class="buttons" id="difficultyToggle">
@@ -37,31 +70,7 @@
                     <span>Name</span>
                 </div> -->
             </div>
-        </div>
 
-        <div class="leaderboard displayNone" >
-            <div class="header">
-                <span>Rk</span>
-                <span>Name</span>
-                <span>Difficulty</span>
-                <span>Points</span>
-            </div>
-
-        </div>
-
-        <div class="middleContainer">
-            <div class="topMiddle">
-                <span class="time">Time: 00:00</span>
-                <span class="score"> Score: 0</span>
-                <span class="difficulty">Difficulty: easy</span>
-                <span id="nameShow">Name: </span>
-            </div>
-            <div class="gameDiv">
-                <canvas id="myCanvas" height="600" width="1000px"></canvas>
-            </div>
-            <div class="bottomMiddle">
-
-            </div>
         </div>
 
         <div class="rightContainer">
@@ -78,7 +87,8 @@
     <script src="javascript/ball.js"></script>
     <script src="javascript/name.js"></script>
     <script src="javascript/leaderboard.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+    <script src="javascript/credits.js"></script>
 
 </body>
 

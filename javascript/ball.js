@@ -4,7 +4,7 @@ var y = canvas.height - 100;
 var dx;
 var dy;
 
-var ballColor = "green"
+var ballColor = "white"
 var ballRadius = 10;
 
 

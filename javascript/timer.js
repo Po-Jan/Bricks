@@ -40,6 +40,8 @@ let isPaused=false;
 const pauseButton = document.querySelector("#pauseButton");
 const pauseText = pauseButton.querySelector("span");
 
+const pauseDiv=document.querySelector(".pauseDiv");
+
 pauseButton.addEventListener("click", () => {
   pauseUnpause()
 });
@@ -50,10 +52,13 @@ function pauseUnpause(){
       pauseGame();
       pauseText.textContent = "Resume"; 
       isPaused = true;
+      pauseDiv.classList.remove("displayNone");
+      ReportBody.inn
   } else {
       unPauseGame();
       pauseText.textContent = "Pause";
       isPaused = false;
+      pauseDiv.classList.add("displayNone");
   }
   }
 }

@@ -6,6 +6,10 @@ let speed = 3;
 let prevDx;
 let prevDy;
 
+const startButton = document.querySelector("#startButton");
+const difficultyButton = document.querySelector("#difficultyToggle");
+const pause = document.querySelector("#pauseButton");
+const leaderboardButton = document.querySelector("#leaderboardButton");
 
 function startGame() {
     if (gameEnded) {
@@ -17,6 +21,9 @@ function startGame() {
         displayPoints();
         displayDifficulty();
         enablePlayerControls();
+        startButton.classList.add("opacity");
+        difficultyButton.classList.add("opacity");
+        leaderboardButton.classList.add("opacity");
     }
 }
 
@@ -30,6 +37,9 @@ function resetGame() {
     resetBricks();
     resetTimer();
     disablePlayerControls();
+    startButton.classList.remove("opacity");
+    difficultyButton.classList.remove("opacity");
+    leaderboardButton.classList.remove("opacity");
 }
 
 
@@ -155,8 +165,8 @@ function draw() {
     if (nextY < ballRadius) {
         dy = -dy;
     }
-    
-    if(nextY+ballRadius>canvas.height){
+
+    if (nextY + ballRadius > canvas.height) {
         loseGame();
         return;
     }

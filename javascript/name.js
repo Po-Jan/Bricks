@@ -1,5 +1,5 @@
 let playerName = "";
-
+let isNameActive=true;
 function askForPlayerName() {
   swal({
     title: "Please insert your name:",
@@ -13,6 +13,7 @@ function askForPlayerName() {
       const input = document.getElementById("nameInput");
       playerName = input.value.trim() || "Anonymous";
       document.getElementById("nameShow").textContent = "Name: "+playerName;
+      isNameActive=false;
     }
   });
 }

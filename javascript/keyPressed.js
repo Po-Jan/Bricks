@@ -34,3 +34,13 @@ function keyDownPause(e){
         pauseUnpause();
     }
 }
+
+document.addEventListener("keydown", keyDownStart, false);
+
+    function keyDownStart(e){
+        if(!isLeaderBoardActive&&!isNameActive)
+            if(e.key.toLowerCase() =='s'){
+                startGame();
+        }
+    }
+
