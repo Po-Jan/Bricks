@@ -2,7 +2,7 @@ let gameEnded = true;
 let playerEnabled = false;
 
 
-let speed = 3;
+let speed = 4;
 let prevDx;
 let prevDy;
 
@@ -30,6 +30,7 @@ function startGame() {
 function resetGame() {
     saveScore();
     gameEnded = true;
+
     dx = 0;
     dy = 0;
     resetBall();
@@ -66,7 +67,6 @@ function winGame() {
 }
 
 function winGameSW() {
-
     swal({
         title: "🎉 Congrats",
         text:
@@ -87,11 +87,13 @@ function winGameSW() {
 
 
 function loseGame() {
+    disableAllKeys();
     loseGameSW();
     resetGame();
 }
 
 function loseGameSW() {
+    IsLoseActive=true;
     swal({
         title: "You lose",
         text: "Try again!\nThe ball hit the bottom.\n\nSummary:\nPoints: " +
@@ -106,7 +108,9 @@ function loseGameSW() {
             },
         },
         className: "lose-popup",
-    });
+    }).then(result => {
+        enableAllKeys();
+      });
 }
 
 function hasGameEnded() {
@@ -184,9 +188,5 @@ function draw() {
 
 
 
-function gameLoop() {
-    draw();
-    requestAnimationFrame(gameLoop);
-}
 
-requestAnimationFrame(gameLoop);
+setInterval(draw,10);

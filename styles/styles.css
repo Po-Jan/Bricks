@@ -19,7 +19,7 @@ body {
 }
 
 .imgDiv {
-  background: url("../assets/bricks_background.jpg") no-repeat center center;
+  background: url("../assets/background_bricks.webp") no-repeat center center;
   opacity: 0.5;
   height: 100%;
   width: 100%;
@@ -59,7 +59,7 @@ body {
 }
 
 .backgroundDiv {
-  background-color: rgba(175, 173, 173, 0.767);
+  background-color: rgba(235, 235, 235, 0.767);
   width: 100%;
   display: flex;
   min-height: 50px;
@@ -88,7 +88,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 15px;
-  background-color: rgba(175, 173, 173, 0.767);
+  background-color: rgba(235, 235, 235, 0.767);
   position: relative;
 }
 
@@ -155,64 +155,78 @@ body {
   color: #1E1F22;
 }
 
-
+/* Scrollbar */
 .leaderboard::-webkit-scrollbar {
-  width: 10px;
-  background-color: rgb(43, 45, 49);
-
+  width: 8px;
 }
 
 .leaderboard::-webkit-scrollbar-thumb {
-  background-color: #1E1F22;
-  border-radius: 10px;
+  background-color: rgba(160, 160, 160, 0.5);
+  border-radius: 6px;
 }
 
+/* Main leaderboard container */
 .leaderboard {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 450px;
+  width: 420px;
   height: 500px;
+  background-color: rgba(255, 255, 255, 0.85); /* bright white glassy */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 5px solid rgb(68, 68, 68);
-  background-color: #979797;
-  color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  color: #333; /* dark gray text for contrast */
+  font-family: 'Segoe UI', sans-serif;
+  overflow-y: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   z-index: 999;
   user-select: none;
-  overflow-y: scroll;
 }
+
+/* Row layout */
+.leaderboard .header,
+.leaderboard > div:not(.header) {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr 60px;
+  height: 48px;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Header row */
+.leaderboard .header {
+  background-color: rgba(240, 240, 240, 0.9);
+  color: #111;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Entry rows */
+.leaderboard > div:not(.header) {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+  color: #222;
+  transition: background-color 0.2s ease;
+}
+
+.leaderboard > div:not(.header):hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+
 
 .opacity {
   opacity: 0.65;
   border: 2px rgba(141, 141, 141, 0.589) solid;
 }
-
-
-.leaderboard .header,
-.leaderboard>div:not(.header) {
-  display: grid;
-  grid-template-columns: 50px 1fr 1fr 70px;
-  /* ID, Name, Difficulty, Points */
-  height: 50px;
-  align-items: center;
-  padding: 0 15px;
-  box-sizing: border-box;
-}
-
-.leaderboard .header {
-  background-color: green;
-  color: white;
-  font-weight: bold;
-}
-
-/* Entry rows */
-.leaderboard>div:not(.header) {
-  background-color: grey;
-  color: white;
-}
-
 
 
 .displayNone {
@@ -238,35 +252,30 @@ body {
   white-space: pre-wrap;
 }
 
-/* --- DIFFICULTY POPUP — Ancient Pyramid / Jungle Inspired --- */
+/* --- DIFFICULTY POPUP — Brick & Mortar Inspired --- */
 .swal-modal.difficulty-popup {
-  background-color: #2c2b29;
-  /* Dark stone / sandstone base */
-  color: #e8e0c7;
-  /* Aged parchment text */
-  border: 1px solid #4a463f;
-  box-shadow: 0 0 12px rgba(180, 150, 90, 0.1);
-  border-radius: 8px;
+  background-color: #f4f1ee; /* Light mortar cream */
+  color: #4b3f35; /* Soft earthy brown text */
+  border: 1px solid #d3b6a3; /* Muted clay border */
+  box-shadow: 0 4px 14px rgba(148, 109, 87, 0.2); /* Warm soft shadow */
+  border-radius: 10px;
   font-family: 'Segoe UI', sans-serif;
 }
 
 /* Title styling */
 .difficulty-popup .swal-title {
-  color: #c9b47f;
-  /* A golden-sand tone */
+  color: #a0603d; /* Burnt orange, brick-inspired */
   font-weight: 600;
   font-size: 18px;
   text-align: center;
 }
 
-/* Dropdown styling */
+/* Dropdown and input styling */
 .difficulty-popup select,
 .difficulty-popup input {
-  background-color: #3b3a36;
-  /* Worn dark stone */
-  color: #e8e0c7;
-  /* Parchment-like text */
-  border: 1px solid #6d634b;
+  background-color: #ffffff; /* Clean input field */
+  color: #4b3f35;
+  border: 1px solid #c9a88e; /* Soft clay edge */
   border-radius: 6px;
   padding: 10px;
   font-size: 15px;
@@ -275,13 +284,10 @@ body {
   font-family: inherit;
 }
 
-
-
 /* Confirm button */
 .difficulty-popup .swal-button {
-  background-color: #5e7c5e;
-  /* Soft jungle green */
-  color: #f3f3e0;
+  background-color: #d98952; /* Toasted brick orange */
+  color: #fff7ef;
   border: none;
   border-radius: 5px;
   padding: 8px 16px;
@@ -291,54 +297,46 @@ body {
 }
 
 .difficulty-popup .swal-button:hover {
-  background-color: #486349;
-  color: #fff;
+  background-color: #b5693e; /* Slightly darker hover */
+  color: #ffffff;
 }
 
-/* --- WIN POPUP — Refined Ancient Jungle Style --- */
+
 .swal-modal.win-popup {
-  background-color: #232220;
-  /* dark earthy stone */
-  color: #e0ddc9;
-  /* soft parchment */
-  border: 1px solid #3e3c36;
-  box-shadow: 0 0 8px rgba(200, 180, 120, 0.1);
+  background-color: #f1efe4; /* Soft parchment background */
+  color: #3b4a3a; /* Earthy olive text */
+  border: 1px solid #b2c0a1; /* Light mossy border */
+  box-shadow: 0 4px 14px rgba(120, 180, 120, 0.15); /* Pale jungle glow */
   border-radius: 10px;
   width: 450px;
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Hide icon if shown */
 .swal-modal.win-popup .swal-icon--success {
   display: none !important;
 }
 
-/* Title */
 .swal-modal.win-popup .swal-title {
-  color: #e7d9a4;
-  /* ancient-gold tone */
+  color: #5d8a5d; /* Calmer leaf green */
   font-weight: 600;
   font-size: 25px;
   margin-bottom: 10px;
   text-align: center;
 }
 
-/* Body text */
 .swal-modal.win-popup .swal-text {
-  color: #e0ddc9;
+  color: #3b4a3a;
   font-size: 16px;
   line-height: 1.6;
   white-space: pre-wrap;
   text-align: center;
 }
 
-/* Confirm button */
 .win-button {
-  background-color: #5e7c5e;
-  /* calm jungle green */
-  color: #f3f1e8;
-  border: 1px solid #3d5242;
+  background-color: #8fc78f; /* Brightened jungle green */
+  color: #ffffff;
+  border: 1px solid #6ca96c;
   border-radius: 6px;
   padding: 10px 20px;
   font-weight: 500;
@@ -348,55 +346,45 @@ body {
 }
 
 .win-button:hover {
-  background-color: #486349;
+  background-color: #6ca96c;
   color: #ffffff;
 }
 
-
-/* --- LOSE POPUP — Ancient Jungle Theme --- */
 .swal-modal.lose-popup {
-  background-color: #2a2423;
-  /* dark stone/red clay tone */
-  color: #f0d7d2;
-  /* light warm tone */
-  border: 1px solid #4f3b39;
-  box-shadow: 0 0 10px rgba(120, 50, 50, 0.15);
+  background-color: #f8f1ef; /* Warm clay-tinted parchment */
+  color: #5a2d2d; /* Richer red-brown */
+  border: 1px solid #d8a7a7; /* Soft brick border */
+  box-shadow: 0 4px 14px rgba(200, 100, 100, 0.1); /* Warm glow */
   border-radius: 10px;
   width: 450px;
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Hide the default SweetAlert error icon */
 .swal-modal.lose-popup .swal-icon--error {
   display: none !important;
 }
 
-/* Title */
 .swal-modal.lose-popup .swal-title {
-  color: #e67e7e;
-  /* dusty red */
+  color: #c06060; /* Bright clay red */
   font-weight: 600;
   font-size: 22px;
   margin-bottom: 10px;
   text-align: center;
 }
 
-/* Text */
 .swal-modal.lose-popup .swal-text {
-  color: #f0d7d2;
+  color: #5a2d2d;
   font-size: 16px;
   line-height: 1.6;
   white-space: pre-wrap;
   text-align: center;
 }
 
-/* Confirm Button */
 .lose-button {
-  background-color: #7b3f3f;
-  /* muted brick red */
-  color: #fbeeee;
-  border: 1px solid #aa5a5a;
+  background-color: #e87c7c; /* Brightened coral red */
+  color: #fff4f4;
+  border: 1px solid #c06060;
   border-radius: 6px;
   padding: 10px 20px;
   font-weight: 500;
@@ -406,6 +394,7 @@ body {
 }
 
 .lose-button:hover {
-  background-color: #aa5a5a;
+  background-color: #c06060;
   color: #ffffff;
 }
+

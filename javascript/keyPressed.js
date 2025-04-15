@@ -44,3 +44,21 @@ document.addEventListener("keydown", keyDownStart, false);
         }
     }
 
+
+    function disableAllKeys() {
+        window.addEventListener('keydown', blockKey, true);
+        window.addEventListener('keyup', blockKey, true);
+        window.addEventListener('keypress', blockKey, true);
+    }
+    
+    function blockKey(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    function enableAllKeys() {
+        window.removeEventListener('keydown', blockKey, true);
+        window.removeEventListener('keyup', blockKey, true);
+        window.removeEventListener('keypress', blockKey, true);
+    }
+    

@@ -11,13 +11,13 @@ document.getElementById("difficultyToggle").addEventListener("click", () => {
         displayDifficulty();
         switch (difficultyVariable) {
           case "amateur":
-            speed = 4.5;
+            speed = speed+1;
             break;
           case "hard":
-            speed = 6;
+            speed = speed+2;
             break;
           default:
-            speed = 3;
+            speed = speed+3;
         }
 
       }
