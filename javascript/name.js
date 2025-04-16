@@ -12,6 +12,8 @@ function askForPlayerName() {
     if (value) {
       const input = document.getElementById("nameInput");
       playerName = input.value.trim() || "Anonymous";
+      if(playerName=="Credits")
+        Credits();
       document.getElementById("nameShow").textContent = "Name: "+playerName;
       isNameActive=false;
     }
